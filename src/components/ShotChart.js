@@ -12,7 +12,7 @@ export class ShotChart extends React.Component {
         playerId: PropTypes.number.isRequired,
     }
 
-    componentDidMount() {
+    componentDidUpdate() {
         nba.stats.shots({
             PlayerID: this.props.playerId
         }).then((response) => {
@@ -27,11 +27,14 @@ export class ShotChart extends React.Component {
             const courtSelection = d3.select("#shot-chart");
             courtSelection.html('');
             const chart_court = court().width(500);
-            const chart_shots = shots().shotRenderThreshold(2).displayToolTips(true).displayType("hexbin");
+            const chart_shots = shots().shotRenderThreshold(this.props.minCount).displayToolTips(true).displayType("hexbin");
             courtSelection.call(chart_court);
             courtSelection.datum(final_shots).call(chart_shots);
         });
     }
+
+    //通过call id来使用第三方library（e.g. d3, a library written in regular javascript)
+    //第三方library一般放在react 的 didMount里
     render() {
         return (
             <div id="shot-chart"></div>

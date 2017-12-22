@@ -1,3 +1,4 @@
+
 import React from 'react';
 import nba from 'nba';
 import * as d3 from 'd3';
@@ -9,10 +10,12 @@ window.d3_hexbin = {hexbin : hexbin}; // workaround library problem
 
 export class ShotChart extends React.Component {
     static propTypes = {
-        playerId: PropTypes.number.isRequired,
+        playerId: PropTypes.number,
+        minCount: PropTypes.number.isRequired,
     }
 
     componentDidUpdate() {
+        const _this = this;
         nba.stats.shots({
             PlayerID: this.props.playerId
         }).then((response) => {
@@ -27,17 +30,20 @@ export class ShotChart extends React.Component {
             const courtSelection = d3.select("#shot-chart");
             courtSelection.html('');
             const chart_court = court().width(500);
-            const chart_shots = shots().shotRenderThreshold(this.props.minCount).displayToolTips(true).displayType("hexbin");
+            const chart_shots = shots().shotRenderThreshold(_this.props.minCount).displayToolTips(true).displayType("hexbin");
             courtSelection.call(chart_court);
             courtSelection.datum(final_shots).call(chart_shots);
         });
     }
-
-    //通过call id来使用第三方library（e.g. d3, a library written in regular javascript)
-    //第三方library一般放在react 的 didMount里
     render() {
         return (
             <div id="shot-chart"></div>
         );
     }
 }
+
+
+
+//通过call id来使用第三方library（e.g. d3, a library written in regular javascript)
+    //第三方library一般放在react 的 didMount里
+

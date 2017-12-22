@@ -1,6 +1,5 @@
 import React from 'react';
-import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from "../constants";
-
+import { PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX } from '../constants';
 
 export class Profile extends React.Component {
     render() {
@@ -9,17 +8,17 @@ export class Profile extends React.Component {
             teamCity,
             teamName,
             playerName,
+            playerId,
             height,
             weight,
             pts, reb, ast, pie,
         } = this.props.playerInfo;
-
-        return(
+        return (
             <div className="profile">
                 <div className="profile-entry player-name">{`${playerName}`}</div>
                 <img
                     className="profile-pic"
-                    src={`${PROFILE_PIC_URL_PREFIX}/${this.props.playerId}.png`}
+                    src={`${PROFILE_PIC_URL_PREFIX}/${playerId}.png`}
                     alt="Profile"
                 />
                 <div className="profile-entry">

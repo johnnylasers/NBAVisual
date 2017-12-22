@@ -13,7 +13,7 @@ export class CountSlider extends React.Component {
     render() {
         return (
             <Row>
-                <Col span={12}>
+                <Col span={12} offset={3}>
                     <Slider min={1} max={10} onChange={this.onChange} value={this.state.inputValue} />
                 </Col>
                 <Col span={4}>

@@ -6,7 +6,9 @@ import {SearchBar} from './SearchBar'
 
 export class Main extends React.Component {
     state = {
-        playerInfo: {},
+        playerInfo: {
+            playerId: 201939,
+        },
     }
 
     handleSelectPlayer = (name) => {
